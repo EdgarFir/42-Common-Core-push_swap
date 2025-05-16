@@ -6,7 +6,7 @@
 /*   By: edfreder <edfreder@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:30:52 by edfreder          #+#    #+#             */
-/*   Updated: 2025/05/15 15:58:09 by edfreder         ###   ########.fr       */
+/*   Updated: 2025/05/16 17:12:25 by edfreder         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	order(int *arr, int *arr_ord_cpy)
 	int i;
 	int arr_size;
 
-	arr_size = get_arr_size(arr, SIZE);
+	arr_size = get_arr_size(arr);
 	min = 0;
 	i = 0;
 	while (i < arr_size)
@@ -45,82 +45,168 @@ void	order(int *arr, int *arr_ord_cpy)
 	}
 }
 
-void check_a(int *arr)
+int get_min(int curr_n, int post_n, int last_n)
 {
-	int arr_size;
-	int post_n;
-	int last_n;
+	int min;
 
-	arr_size = get_arr_size(arr, SIZE);
-	post_n = arr[1];
-	last_n = arr[2];
-	if (arr[0] > post_n || arr[0] > last_n)
+	min = curr_n;
+	if (min > post_n && post_n != 0)
+		min = post_n;
+	if (min > last_n && last_n != 0)
+		min = last_n;
+	return (min);
+}
+
+int get_max(int curr_n, int post_n, int last_n)
+{
+	int max;
+
+	max = curr_n;
+	if (max < post_n && post_n != 0)
+		max = post_n;
+	if (max < last_n && last_n != 0)
+		max = last_n;
+	return (max);
+}
+
+int is_from_chunk(int elem, int *chunk)
+{
+	int start;
+	int end;
+	int mid;
+
+	start = 0;
+	end = get_arr_size(chunk);
+	while (start < end)
 	{
-		if (post_n < last_n)
-			reverse_rotate(arr);
+		mid = start + (end - start) / 2;
+		if (elem == chunk[mid])
+			return (1);
+		else if (elem > chunk[mid])
+			start = mid + 1;
 		else
-			swap(arr);
+			end = mid;
 	}
-}
-
-void check_b(int *arr)
-{
-	int arr_size;
-	int post_n;
-	int last_n;
-
-	arr_size = get_arr_size(arr, SIZE);
-	post_n = arr[1];
-	last_n = arr[2];
-	if (arr[0] < post_n || arr[0] < last_n)
-	{
-		if (post_n > last_n)
-			reverse_rotate(arr);
-		else
-			swap(arr);
-	}
-}
-
-void check_changes(int *arr1, int *arr2)
-{
-	check_a(arr1);
-	check_b(arr2);
-}
-
-int	find_index(int *arr, int search_num)
-{
-	int i;
+	return (0);
 	
-	i = 0;
-	while (arr[i] != search_num)
-		i++;
-	return i;
 }
 
-void push_index(int *arr1, int *arr2, int search_num)
+int	check_a(int *arr1, int *chunk)
 {
-	int index;
+	int arr_size;
+	int min;
 
-	index = find_index(arr1, search_num);
-	printf("%i\n", index);
+	arr_size = get_arr_size(arr1);
+	min = get_min(arr1[0], arr1[1], arr1[arr_size - 1]);
+	if (is_from_chunk(min, chunk))
+	{
+		if (min == arr1[1])
+			swap(arr1);
+		else if (min == arr1[arr_size - 1])
+			reverse_rotate(arr1);
+		return (1);
+	}
+	return (0);
+}
+
+int	check_b(int *arr1, int *chunk)
+{
+	int arr_size;
+	int max;
+
+	arr_size = get_arr_size(arr1);
+	max = get_max(arr1[0], arr1[1], arr1[arr_size - 1]);
+	if (is_from_chunk(max, chunk))
+	{
+		if (max == arr1[1])
+			swap(arr1);
+		else if (max == arr1[arr_size - 1])
+			reverse_rotate(arr1);
+		return (1);
+	}
+	return (0);
+}
+
+int is_full_ordered(int *arr)
+{
+	int i = 0;
+	int arr_size = get_arr_size(arr);
+	if (arr_size != SIZE)
+		return (0);
+	while (arr[i + 1])
+	{
+		if (arr[i] > arr[i + 1])
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int calc_moves(int *arr, int *chunk, int start, int end)
+{
+	int moves;
+	
+	moves = 0;
+	while (start < end)
+	{
+		if (!is_from_chunk(arr[start], chunk))
+			moves++;
+		else
+			break ;
+		start++;
+	}
+	return (moves);
+}
+
+void push_chunk(int *arr, int *chunk)
+{
+	int half1_moves;
+	int half2_moves;
+	int mid;
+	int end;
+	
+	end = get_arr_size(arr);
+	mid = end / 2;
+	half1_moves = calc_moves(arr, chunk, 2, mid) + 2;
+	half2_moves = calc_moves(arr, chunk, mid, end - 1) + 1;
+	// Comparar as duas halfs
+	// Executar rr ou rrr
+	return ;s
 }
 
 int	main(int argc, char **argv)
 {
-	int arr1[SIZE] = {6, 5, 4, 3, 2, 1};
-	int arr2[SIZE] = {0};
-	int ordered[SIZE] = {0};
-	
+	int arr1[SIZE + 1] = {6, 5, 4, 3, 2, 1, 0};
+	int arr2[SIZE + 1] = {0}; // 
+	int ordered[SIZE + 1] = {0};
 	order(arr1, ordered);
+	int **chunk = create_chunk(ordered, SIZE, 2);
+	int chunk_size;
+	chunk_size = 0;
 	int	is_sorted = 0;
-	int i = 0;
-	while (i < SIZE)
+	int j = 0;
+	while (!is_sorted)
 	{
-		check_changes(arr1, arr2);
-		push_index(arr1, arr2, ordered[i]);
-		is_sorted = 1;
-		break;
+		while (j < 3)
+		{
+			// Create chunk
+			if (check_a(arr1, chunk[j]))
+				push(arr1, arr2);
+			else
+				push_chunk(arr1, chunk);
+		}
+		j--;
+		while (j >= 0)
+		{
+			// Create chunk
+			while (check_b(arr2, chunk[j]))
+				push(arr2, arr1);
+			j--;
+		}
+		if (is_full_ordered(arr1))
+			is_sorted = 1;
 	}
+	printf("\n");
 	print_arr(arr1, SIZE);
 	print_arr(arr2, SIZE);
 }

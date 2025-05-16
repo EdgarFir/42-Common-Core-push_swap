@@ -6,7 +6,7 @@
 /*   By: edfreder <edfreder@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 10:12:04 by edfreder          #+#    #+#             */
-/*   Updated: 2025/05/15 15:16:12 by edfreder         ###   ########.fr       */
+/*   Updated: 2025/05/16 15:39:38 by edfreder         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ void	print_arr(int *arr, int def_size)
 	printf("\n");
 }
 
-int		get_arr_size(int *arr, int def_size)
+int		get_arr_size(int *arr)
 {
 	int	size;
 
 	size = 0;
-	while (arr[size] && size < def_size)
+	while (arr[size])
 		size++;
 	return (size);
 }
@@ -39,7 +39,7 @@ void	swap(int *arr)
 {
 	int	temp;
 	
-	if (get_arr_size(arr, SIZE) > 1)
+	if (get_arr_size(arr) > 1)
 	{
 		temp = arr[0];
 		arr[0] = arr[1];
@@ -53,7 +53,7 @@ void reverse_rotate(int *arr)
 	int	arr_size;
 	int	i;
 
-	arr_size = get_arr_size(arr, SIZE);
+	arr_size = get_arr_size(arr);
 	last_elem = arr[arr_size - 1];
 	i = arr_size - 1;
 	while (i >= 0)
@@ -70,7 +70,7 @@ void rotate(int *arr)
 	int	arr_size;
 	int	i;
 
-	arr_size = get_arr_size(arr, SIZE);
+	arr_size = get_arr_size(arr);
 	first_elem = arr[0];
 	i = 0;
 	while (i < arr_size - 1)
@@ -87,8 +87,8 @@ void	push(int *push_from, int *push_to)
 	int	push_to_size;
 	int	elem_to_push;
 
-	push_from_size = get_arr_size(push_from, SIZE);
-	push_to_size = get_arr_size(push_to, SIZE);
+	push_from_size = get_arr_size(push_from);
+	push_to_size = get_arr_size(push_to);
 	elem_to_push = push_from[0];
 	if (push_from_size)
 	{
@@ -103,37 +103,21 @@ void	push(int *push_from, int *push_to)
 		push_from[push_from_size - 1] = 0;
 	}
 }
-/*
-int main()
-{
-	int arr1[SIZE] = {6, 5, 4, 3, 2, 1};
-	int arr2[SIZE] = {0};
+
+// int main()
+// {
+// 	int arr1[SIZE] = {6, 5, 4, 3, 2, 1};
+// 	int arr2[SIZE] = {0};
 
 	
-	print_arr(arr1, SIZE);
-	print_arr(arr2, SIZE);
-	printf("\n");
+// 	print_arr(arr1, SIZE);
+// 	print_arr(arr2, SIZE);
+// 	printf("\n");
 	
-	swap(arr1); // 5, 6, 4, 3, 2, 1
-	print_arr(arr1, SIZE);
-	print_arr(arr2, SIZE);
-	printf("\n");
-	
-	rotate(arr1); // 6, 4, 3, 2, 1, 5
-	print_arr(arr1, SIZE);
-	print_arr(arr2, SIZE);
-	printf("\n");
-	
-	swap(arr1); // 4, 6, 3, 2, 1, 5
-	print_arr(arr1, SIZE);
-	print_arr(arr2, SIZE);
-	printf("\n");
-	
-	reverse_rotate(arr1); // 5, 4, 6, 3, 2, 1
-	print_arr(arr1, SIZE);
-	print_arr(arr2, SIZE);
-	printf("\n");
+// 	push(arr1, arr2); // 5, 4, 6, 3, 2, 1
+// 	print_arr(arr1, SIZE);
+// 	print_arr(arr2, SIZE);
+// 	printf("\n");
 	
 
-}
-	*/
+// }
