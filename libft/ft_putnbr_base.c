@@ -1,31 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_putnbr_base.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edfreder <edfreder@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/15 10:12:57 by edfreder          #+#    #+#             */
-/*   Updated: 2025/05/16 15:07:14 by edfreder         ###   ########.fr       */
+/*   Created: 2025/04/24 00:33:41 by edfreder          #+#    #+#             */
+/*   Updated: 2025/05/04 23:07:56 by edfreder         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
+#include "libft.h"
 
-# define PUSH_SWAP_H
+int	ft_putnbr_base(unsigned long long n, char *base_s, int base_i)
+{
+	int	total;
 
-# include <stdio.h>
-# include <stdlib.h>
-
-# define SIZE 6
-
-int		get_arr_size(int *arr);
-void	print_arr(int *arr, int def_size);
-void rotate(int *arr);
-void reverse_rotate(int *arr);
-void	swap(int *arr);
-void	push(int *push_from, int *push_to);
-int		**create_chunk(int *arr, int arr_size, int chunk_size);
-
-
-#endif 
+	total = 0;
+	if (n >= (unsigned long long)base_i)
+		total += ft_putnbr_base(n / base_i, base_s, base_i);
+	ft_putchar_fd(base_s[n % base_i], 1);
+	return (total + 1);
+}
