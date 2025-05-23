@@ -1,88 +1,105 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   operations.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: edfreder <edfreder@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/23 01:01:50 by edfreder          #+#    #+#             */
+/*   Updated: 2025/05/23 02:24:08 by edfreder         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-void	swap(int *arr, char *oper)
+void	swap(int *arr, char *oper, int size)
 {
 	int	temp;
-	
-	if (cal_arr_size(arr) > 1)
+
+	if (size > 1)
 	{
 		temp = arr[0];
 		arr[0] = arr[1];
 		arr[1] = temp;
-		printf("%s\n", oper);
+		ft_printf("%s\n", oper);
 	}
 }
 
-void reverse_rotate(int *arr, int moves, char *oper)
+void	reverse_rotate(int *stack, int moves, char *oper, int size)
 {
 	int	last_elem;
-	int	arr_size;
 	int	i;
-	int j;
+	int	j;
 
-	arr_size = cal_arr_size(arr);
 	j = 0;
 	while (j < moves)
 	{
-		last_elem = arr[arr_size - 1];
-		i = arr_size - 1;
+		last_elem = stack[size - 1];
+		i = size - 1;
 		while (i >= 0)
 		{
-			arr[i] = arr[i - 1];
+			stack[i] = stack[i - 1];
 			i--;
 		}
-		arr[0] = last_elem;
+		stack[0] = last_elem;
 		j++;
 		if (oper)
-			printf("%s\n", oper);
+			ft_printf("%s\n", oper);
 	}
 }
 
-void rotate(int *arr, int moves, char *oper)
+void	rotate(int *stack, int moves, char *oper, int size)
 {
 	int	first_elem;
-	int	arr_size;
 	int	i;
-	int j;
+	int	j;
 
-	arr_size = cal_arr_size(arr);
 	j = 0;
 	while (j < moves)
 	{
-		first_elem = arr[0];
+		first_elem = stack[0];
 		i = 0;
-		while (i < arr_size - 1)
+		while (i < size - 1)
 		{
-			arr[i] = arr[i + 1];
+			stack[i] = stack[i + 1];
 			i++;
 		}
-		arr[arr_size - 1] = first_elem;
+		stack[size - 1] = first_elem;
 		j++;
 		if (oper)
-			printf("%s\n", oper);
+			ft_printf("%s\n", oper);
 	}
 }
 
-void	push(int *push_from, int *push_to, char *oper)
+void	push(int **stacks, int push_from_size, int push_to_size, char *oper)
 {
-	int	push_from_size;
-	int	push_to_size;
 	int	elem_to_push;
 
-	push_from_size = cal_arr_size(push_from);
-	push_to_size = cal_arr_size(push_to);
-	elem_to_push = push_from[0];
+	elem_to_push = stacks[0][0];
 	if (push_from_size)
 	{
-		rotate(push_from, 1, NULL);
+		rotate(stacks[0], 1, NULL, push_from_size);
 		if (!push_to_size)
-			push_to[0] = elem_to_push;
+			stacks[1][0] = elem_to_push;
 		else
 		{
-			push_to[push_to_size] = elem_to_push;
-			reverse_rotate(push_to, 1, NULL);
+			stacks[1][push_to_size] = elem_to_push;
+			reverse_rotate(stacks[1], 1, NULL, push_to_size + 1);
 		}
-		push_from[push_from_size - 1] = 0;
-		printf("%s\n", oper);
+		ft_printf("%s\n", oper);
+	}
+}
+
+void	push_helper(int **stacks, int a_size, int b_size, int mode)
+{
+	int	*temp[2];
+
+	if (mode == 1)
+		push(stacks, a_size, b_size, "pb");
+	else
+	{
+		temp[0] = stacks[1];
+		temp[1] = stacks[0];
+		push(temp, b_size, a_size, "pa");
 	}
 }

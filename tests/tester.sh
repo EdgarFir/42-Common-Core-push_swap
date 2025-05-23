@@ -1,62 +1,56 @@
-cc tester.c
-make
+#!/bin/bash
 
-ARGS=$(./a.out 1)
+# Compila o gerador de argumentos e o projeto push_swap
+cc tester.c -L ../libft/. -lft -I ../libft/ -o tester
+make -C ../ > /dev/null
+
+# Função para correr um teste
+run_test()
+{
+	ARGS=$(./tester "$1")
+	echo "Test $1"
+	OUTPUT=$(../push_swap $ARGS)
+
+	# Verifica se está OK e quantos movimentos
+	echo "$OUTPUT" | ./checker_linux $ARGS
+	echo "$OUTPUT" | wc -l
+	echo ""
+}
+
 echo "Test 1"
-.././push_swap 1 | ./checker_linux 1
-.././push_swap 1 | wc -l
+OUTPUT=$(../push_swap 1)
 
-ARGS=$(./a.out 2)
+../push_swap 1| ./checker_linux 1
+../push_swap 1 | wc -l
+echo ""
+
 echo "Test 2"
-.././push_swap "2 1" | ./checker_linux "2 1"
-.././push_swap "2 1" | wc -l
+OUTPUT=$(../push_swap 1)
 
-ARGS=$(./a.out 3)
+../push_swap 2 1 | ./checker_linux 2 1
+../push_swap 2 1 | wc -l
+echo ""
+
 echo "Test 3"
-.././push_swap "3 1 2"  | ./checker_linux "3 1 2"
-.././push_swap "3 1 2" | wc -l
+OUTPUT=$(../push_swap 2 1 0)
 
-ARGS=$(./a.out 4)
+../push_swap 2 1 0 | ./checker_linux 2 1 0
+../push_swap 2 1 0 | wc -l
+echo ""
+
 echo "Test 4"
-.././push_swap "4 2 1 3" | ./checker_linux "4 2 1 3"
-.././push_swap "4 2 1 3" | wc -l
+OUTPUT=$(../push_swap 4 1 3 2)
 
-ARGS=$(./a.out 10)
-echo "Test 10"
-.././push_swap ${ARGS} | ./checker_linux ${ARGS}
-.././push_swap ${ARGS} | wc -l
+../push_swap 4 1 3 2 | ./checker_linux 4 1 3 2
+../push_swap 4 1 3 2 | wc -l
+echo ""
 
-ARGS=$(./a.out 25)
-echo "Test 30"
-.././push_swap ${ARGS} | ./checker_linux ${ARGS}
-.././push_swap ${ARGS} | wc -l
-
-ARGS=$(./a.out 50)
-echo "Test 50"
-.././push_swap ${ARGS} | ./checker_linux ${ARGS}
-.././push_swap ${ARGS} | wc -l
-
-ARGS=$(./a.out 61)
-echo "Test 61"
-.././push_swap ${ARGS} | ./checker_linux ${ARGS}
-.././push_swap ${ARGS} | wc -l
-
-ARGS=$(./a.out 100)
-echo "Test 100"
-.././push_swap ${ARGS} | ./checker_linux ${ARGS}
-.././push_swap ${ARGS} | wc -l
-
-ARGS=$(./a.out 331)
-echo "Test 331"
-.././push_swap ${ARGS} | ./checker_linux ${ARGS}
-.././push_swap ${ARGS} | wc -l
-
-ARGS=$(./a.out 500)
-echo "Test 500"
-.././push_swap ${ARGS} | ./checker_linux ${ARGS}
-.././push_swap ${ARGS} | wc -l
-
-ARGS=$(./a.out 1000)
-echo "Test 1000"
-.././push_swap ${ARGS} | ./checker_linux ${ARGS}
-.././push_swap ${ARGS} | wc -l
+run_test 5
+run_test 10
+run_test 25
+run_test 50
+run_test 61
+run_test 100
+run_test 331
+run_test 500
+run_test 1000

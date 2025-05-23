@@ -6,83 +6,82 @@
 /*   By: edfreder <edfreder@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 22:39:52 by edfreder          #+#    #+#             */
-/*   Updated: 2025/05/22 00:34:11 by edfreder         ###   ########.fr       */
+/*   Updated: 2025/05/23 02:33:15 by edfreder         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void rr(int *stack_a, int *stack_b, int moves)
+void	rr(int **stacks, int a_size, int b_size, int moves)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < moves)
 	{
-		printf("rr\n");
+		ft_printf("rr\n");
 		i++;
 	}
-	rotate(stack_a, moves, NULL);
-	rotate(stack_b, moves, NULL);
-
+	rotate(stacks[0], moves, NULL, a_size);
+	rotate(stacks[1], moves, NULL, b_size);
 }
 
-void rrr(int *stack_a, int *stack_b, int moves)
+void	rrr(int **stacks, int a_size, int b_size, int moves)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < moves)
 	{
-		printf("rrr\n");
+		ft_printf("rrr\n");
 		i++;
 	}
-	reverse_rotate(stack_a, moves, NULL);
-	reverse_rotate(stack_b, moves, NULL);
+	reverse_rotate(stacks[0], moves, NULL, a_size);
+	reverse_rotate(stacks[1], moves, NULL, b_size);
 }
 
-void perfom_r(int *stack_a, int *stack_b, t_opers min_opers[2])
+void	perfom_r(int **stacks, int a_size, int b_size, t_opers *opers)
 {
-	if (min_opers[0].r && min_opers[1].r)
+	if (opers[0].r && opers[1].r)
 	{
-		if (min_opers[0].r > min_opers[1].r)
+		if (opers[0].r > opers[1].r)
 		{
-			rr(stack_a, stack_b, min_opers[1].r);
-			rotate(stack_a, min_opers[0].r - min_opers[1].r, "ra");
+			rr(stacks, a_size, b_size, opers[1].r);
+			rotate(stacks[0], opers[0].r - opers[1].r, "ra", a_size);
 		}
-		else if (min_opers[0].r < min_opers[1].r)
+		else if (opers[0].r < opers[1].r)
 		{
-			rr(stack_a, stack_b, min_opers[0].r);
-			rotate(stack_b, min_opers[1].r - min_opers[0].r, "rb");
+			rr(stacks, a_size, b_size, opers[0].r);
+			rotate(stacks[1], opers[1].r - opers[0].r, "rb", b_size);
 		}
 		else
-			rr(stack_a, stack_b, min_opers[0].r);
+			rr(stacks, a_size, b_size, opers[0].r);
 	}
-	else if (min_opers[0].r)
-		rotate(stack_a, min_opers[0].r, "ra");
-	else if (min_opers[1].r)
-		rotate(stack_b, min_opers[1].r, "rb");
+	else if (opers[0].r)
+		rotate(stacks[0], opers[0].r, "ra", a_size);
+	else if (opers[1].r)
+		rotate(stacks[1], opers[1].r, "rb", b_size);
 }
 
-void perfom_rr(int *stack_a, int *stack_b, t_opers min_opers[2])
+void	perfom_rr(int **stacks, int a_size, int b_size, t_opers *opers)
 {
-	if (min_opers[0].rr && min_opers[1].rr)
+	if (opers[0].rr && opers[1].rr)
 	{
-		if (min_opers[0].rr > min_opers[1].rr)
+		if (opers[0].rr > opers[1].rr)
 		{
-			rrr(stack_a, stack_b, min_opers[1].rr);
-			reverse_rotate(stack_a, min_opers[0].rr - min_opers[1].rr, "rra");
+			rrr(stacks, a_size, b_size, opers[1].rr);
+			reverse_rotate(stacks[0], opers[0].rr - opers[1].rr, "rra", a_size);
 		}
-		else if (min_opers[0].rr < min_opers[1].rr)
+		else if (opers[0].rr < opers[1].rr)
 		{
-			rrr(stack_a, stack_b, min_opers[0].rr);
-			reverse_rotate(stack_b, min_opers[1].rr - min_opers[0].rr, "rrb");
+			rrr(stacks, a_size, b_size, opers[0].rr);
+			reverse_rotate(stacks[1], opers[1].rr - opers[0].rr, "rrb", b_size);
 		}
 		else
-			rrr(stack_a, stack_b, min_opers[0].rr);
+			rrr(stacks, a_size, b_size, opers[0].rr);
 	}
-	else if (min_opers[0].rr)
-		reverse_rotate(stack_a, min_opers[0].rr, "rra");
-	else if (min_opers[1].rr)
-		reverse_rotate(stack_b, min_opers[1].rr, "rrb");
+	else if (opers[0].rr)
+		reverse_rotate(stacks[0], opers[0].rr, "rra", a_size);
+	else if (opers[1].rr)
+		reverse_rotate(stacks[1], opers[1].rr, "rrb", b_size);
 }
