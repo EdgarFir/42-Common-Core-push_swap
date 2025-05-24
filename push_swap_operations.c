@@ -6,7 +6,7 @@
 /*   By: edfreder <edfreder@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 01:01:50 by edfreder          #+#    #+#             */
-/*   Updated: 2025/05/23 02:24:08 by edfreder         ###   ########.fr       */
+/*   Updated: 2025/05/23 16:30:07 by edfreder         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	reverse_rotate(int *stack, int moves, char *oper, int size)
 	{
 		last_elem = stack[size - 1];
 		i = size - 1;
-		while (i >= 0)
+		while (i >= 1)
 		{
 			stack[i] = stack[i - 1];
 			i--;

@@ -6,7 +6,7 @@
 /*   By: edfreder <edfreder@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 21:14:21 by edfreder          #+#    #+#             */
-/*   Updated: 2025/05/23 03:09:27 by edfreder         ###   ########.fr       */
+/*   Updated: 2025/05/24 14:59:36 by edfreder         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ void	turkish_sort(int *stack_a, int *stack_b, int argc)
 
 int	fill_stack_a(int *stack_a, char **argv, int argc)
 {
-	int	i;
-	int	nbr;
+	int			i;
+	long long	nbr;
 
 	i = 0;
 	while (i < argc)
@@ -65,7 +65,7 @@ int	fill_stack_a(int *stack_a, char **argv, int argc)
 void	sort_low(int *stack_a, int *stack_b, int nbr_count)
 {
 	int	i;
-	int *stacks[2];
+	int	*stacks[2];
 	int	a_size;
 	int	b_size;
 
@@ -98,6 +98,8 @@ int	main(int argc, char **argv)
 
 	if (argc > 1)
 	{
+		if (argc == 2)
+			return (0);
 		stack_a = ft_calloc(argc - 1, sizeof(int));
 		stack_b = ft_calloc(argc - 1, sizeof(int));
 		if (!stack_a || !stack_b || !fill_stack_a(stack_a, argv + 1, argc - 1))
@@ -110,6 +112,5 @@ int	main(int argc, char **argv)
 			turkish_sort(stack_a, stack_b, argc);
 		return (clean_and_return(stack_a, stack_b, 0, 0));
 	}
-	ft_putstr_fd("Error\n", 2);
-	return (1);
+	return (0);
 }

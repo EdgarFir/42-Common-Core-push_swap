@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap_checker_utils.c                          :+:      :+:    :+:   */
+/*   checker_error_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edfreder <edfreder@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/21 22:26:59 by edfreder          #+#    #+#             */
-/*   Updated: 2025/05/24 00:03:59 by edfreder         ###   ########.fr       */
+/*   Created: 2025/05/23 19:23:56 by edfreder          #+#    #+#             */
+/*   Updated: 2025/05/24 00:03:20 by edfreder         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "checker_bonus.h"
 
 int	is_sorted(int *stack, int size)
 {
@@ -74,26 +74,6 @@ int	is_nbr(char *nbr)
 		if (!ft_isdigit(nbr[i]))
 			return (0);
 		i++;
-	}
-	return (1);
-}
-
-int	valid_inter(int *stack, int check_elem, int *cmp_elems, int size)
-{
-	int	temp;
-
-	if (cmp_elems[0] > cmp_elems[1])
-	{
-		if (!is_valid(stack, check_elem, cmp_elems, size))
-			return (0);
-	}
-	else
-	{
-		temp = cmp_elems[0];
-		cmp_elems[0] = cmp_elems[1];
-		cmp_elems[1] = temp;
-		if (!is_valid(stack, check_elem, cmp_elems, size))
-			return (0);
 	}
 	return (1);
 }
