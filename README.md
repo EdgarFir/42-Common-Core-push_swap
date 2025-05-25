@@ -57,7 +57,7 @@ Only the two main stacks (**A** and **B**) and auxiliary variables are used. No 
 
 Effective for mid to large datasets (100–500 numbers).
 
-**Turkish Sort Tutorial source**: https://medium.com/@ayogun/push-swap-c1f5d2d41e97
+**Turkish Sort tutorial source**: https://medium.com/@ayogun/push-swap-c1f5d2d41e97
 
 ## Concepts learned:
 - Development and analysis of efficient sorting algorithms, within the constraints of a specific and limited instruction set.
