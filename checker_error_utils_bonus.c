@@ -6,7 +6,7 @@
 /*   By: edfreder <edfreder@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 19:23:56 by edfreder          #+#    #+#             */
-/*   Updated: 2025/05/24 00:03:20 by edfreder         ###   ########.fr       */
+/*   Updated: 2025/05/24 22:33:38 by edfreder         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ int	is_nbr(char *nbr)
 	i = 0;
 	if (nbr[0] == '+' || nbr[0] == '-')
 		i++;
+	if (!nbr[i])
+		return (0);
 	while (nbr[i])
 	{
 		if (!ft_isdigit(nbr[i]))

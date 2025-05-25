@@ -6,11 +6,17 @@
 /*   By: edfreder <edfreder@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 21:47:17 by edfreder          #+#    #+#             */
-/*   Updated: 2025/05/24 00:03:30 by edfreder         ###   ########.fr       */
+/*   Updated: 2025/05/25 00:38:35 by edfreder         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker_bonus.h"
+
+void	ss(int **stacks, int a_size, int b_size)
+{
+	swap(stacks[0], a_size);
+	swap(stacks[1], b_size);
+}
 
 void	swap(int *arr, int size)
 {

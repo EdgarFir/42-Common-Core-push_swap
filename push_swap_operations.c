@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   operations.c                                       :+:      :+:    :+:   */
+/*   push_swap_operations.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edfreder <edfreder@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 01:01:50 by edfreder          #+#    #+#             */
-/*   Updated: 2025/05/23 16:30:07 by edfreder         ###   ########.fr       */
+/*   Updated: 2025/05/24 23:22:32 by edfreder         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ void	swap(int *arr, char *oper, int size)
 		temp = arr[0];
 		arr[0] = arr[1];
 		arr[1] = temp;
-		ft_printf("%s\n", oper);
+		if (oper)
+			ft_printf("%s\n", oper);
 	}
 }
 

@@ -1,16 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   join_operations.c                                  :+:      :+:    :+:   */
+/*   push_swap_join_operations.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edfreder <edfreder@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 22:39:52 by edfreder          #+#    #+#             */
-/*   Updated: 2025/05/23 02:33:15 by edfreder         ###   ########.fr       */
+/*   Updated: 2025/05/25 00:39:38 by edfreder         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	ss(int **stacks, int a_size, int b_size)
+{
+	ft_printf("ss\n");
+	swap(stacks[0], NULL, a_size);
+	swap(stacks[1], NULL, b_size);
+}
 
 void	rr(int **stacks, int a_size, int b_size, int moves)
 {

@@ -6,7 +6,7 @@
 /*   By: edfreder <edfreder@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 19:30:51 by edfreder          #+#    #+#             */
-/*   Updated: 2025/05/24 00:02:20 by edfreder         ###   ########.fr       */
+/*   Updated: 2025/05/25 00:22:48 by edfreder         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int	apply_operation(int **stacks, int *a_size, int *b_size, char *operation)
 		swap(stacks[0], *a_size);
 	else if (ft_strcmp(operation, "sb\n") == 0)
 		swap(stacks[1], *b_size);
+	else if (ft_strcmp(operation, "ss\n") == 0)
+		ss(stacks, *a_size, *b_size);
 	else if (ft_strcmp(operation, "ra\n") == 0)
 		rotate(stacks[0], *a_size);
 	else if (ft_strcmp(operation, "rb\n") == 0)
@@ -56,6 +58,8 @@ int	fill_stack_a(int *stack_a, char **argv, int argc)
 	i = 0;
 	while (i < argc)
 	{
+		if (!argv[i][0])
+			return (0);
 		if (!is_nbr(argv[i]))
 			return (0);
 		nbr = ft_atoll(argv[i]);

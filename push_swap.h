@@ -6,7 +6,7 @@
 /*   By: edfreder <edfreder@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 10:12:57 by edfreder          #+#    #+#             */
-/*   Updated: 2025/05/23 02:46:25 by edfreder         ###   ########.fr       */
+/*   Updated: 2025/05/25 00:41:22 by edfreder         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,9 @@ int		calc_r_oper(t_opers *opers);
 /* Join operations */
 void	perfom_rr(int **stacks, int a_size, int b_size, t_opers *opers);
 void	perfom_r(int **stacks, int a_size, int b_size, t_opers *opers);
+void	rr(int **stacks, int a_size, int b_size, int moves);
+void	rrr(int **stacks, int a_size, int b_size, int moves);
+void	ss(int **stacks, int a_size, int b_size);
 /* Operations */
 void	swap(int *arr, char *oper, int size);
 void	reverse_rotate(int *stack, int moves, char *oper, int size);
