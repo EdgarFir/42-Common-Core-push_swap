@@ -31,12 +31,10 @@ Unlike traditional sorting algorithms that focus solely on theoretical complexit
 #### Step 4: Push Elements Back from B to A
 
 - While **stack B is not empty**:
-  - Find the **largest element in B**.
-  - Rotate stack B (`rb` / `rrb`) until the largest is at the top.
-  - **Push** it back to stack A (`pa`).
+  - For each number from the top to the bottom **push** to A choosing the minimum operations required, based on their value (typically using **chunk ranges**).
   - This ensures elements are reinserted in **descending order**, resulting in a sorted ascending stack A.
 
-## Step 5: Final Adjustment – Push Minimum to Top
+#### Step 5: Final Adjustment – Push Minimum to Top
 
 - After all elements are back in stack A:
   - Locate the **minimum value** in A.
